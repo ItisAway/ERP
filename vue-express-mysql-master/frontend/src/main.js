@@ -12,6 +12,7 @@ import  VueResource  from 'vue-resource'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import '../my-theme/index.less'
+import Generate from './components/Generate.vue'
 
 Vue.use(VueResource)
 Vue.use(iView)
@@ -24,7 +25,10 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App },
+  components: { 
+    App,
+    Generate
+  },
   http: {
     root: '/root',
     headers: {
