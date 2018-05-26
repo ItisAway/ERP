@@ -7,7 +7,7 @@
           <img src='./assets/logo.png' style='height:50px'>
         </div>
            <div class='layout-ceiling-main'>
-          <Button type='text' @click='help'>帮助中心</Button>
+          <a href='../documentation/'>帮助中心</a>
           <Button type='text' @click='logout'>登出</Button>
         </div>    
       </div>
@@ -77,6 +77,7 @@
           </div> 
           <div class='main-content'>
             <router-view></router-view>
+            <generate v-show="showGenerate"><generate>
           </div>
         </i-col>
       </Row>
@@ -85,17 +86,20 @@
 </template>
 
 <script>
+import generate from './components/Generate.vue';
+
 export default {
   name: 'app',
   components: {
-
+    generate
   },
   data () {
     return {
       spanLeft: 5,
       spanRight: 19,
       bigPos:null,
-      samllPos:null
+      samllPos:null,
+      showGenerate: false
     }
   },
   computed: {
@@ -120,12 +124,6 @@ export default {
       }
     },
     /**
-      * @description 帮助中心接口
-      */
-    help () {
-     
-    },
-    /**
       * @description 登出接口
       */
     logout () {
@@ -135,6 +133,7 @@ export default {
       * @description 选择路由，渲染不同组件
       */
     select (name) {
+      this.showGenerate = false;
       if (name === 'outline') {
         name = ''
       }
@@ -168,6 +167,7 @@ export default {
       }else if(name === 'generate'){
         this.bigPos = '生产管理'
         this.samllPos = '生成订单' 
+        this.showGenerate = true
       }else if(name === 'state'){
         this.bigPos = '生产管理'
         this.samllPos = '订单状态查询'
@@ -252,7 +252,6 @@ export default {
 .main-menu-left {
   background: #464c5b;
   height:fill-available;
-  width: 15%;
 }
 
 .main-header {
@@ -295,8 +294,8 @@ export default {
 
 .ivu-btn-text {
     color: #8f9fad;
-    font-size: 14px;
     background-color: transparent;
     border-color: transparent;
 }
+
 </style>
